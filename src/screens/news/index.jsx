@@ -50,15 +50,15 @@ const News = () => {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
 
               axios
-              .get(`${Base_url}/blog/getAll`)
-              .then((res) => {
-                console.log(res);
-        
-                setUsers(res?.data?.data);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+      .get(`${Base_url}/blog/getAll?page=1`)
+      .then((res) => {
+        console.log(res);
+
+        setUsers(res?.data?.data?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
             }
           })
           .catch((error) => {
