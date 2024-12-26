@@ -13,7 +13,6 @@ const Brands = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [isUpdateOpen2, setIsUpdateOpen2] = useState(false);
   const [singleUser, setSingleUser] = useState({});
-
   console.log(isUpdateOpen);
 
 

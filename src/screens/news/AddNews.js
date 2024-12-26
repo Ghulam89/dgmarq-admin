@@ -88,9 +88,16 @@ const AddNews = ({ isModalOpen, setIsModalOpen, closeModal, setUsers }) => {
       if (res?.data?.status === 'success') {
         toast.success(res.data?.message);
 
-        // Fetch updated blogs
-        const blogsRes = await axios.get(`${Base_url}/blog/getAll?page=1`);
-        setUsers(blogsRes?.data?.data);
+        axios
+      .get(`${Base_url}/blog/getAll?page=1`)
+      .then((res) => {
+        console.log(res);
+
+        setUsers(res?.data?.data?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
         setIsModalOpen(false);
       }
     } catch (error) {
