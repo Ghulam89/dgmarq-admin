@@ -84,7 +84,7 @@ const AddProduct = () => {
                 setPreviewImages([]);
                 setSelectedFiles([]);
 
-                navigate('/products')
+                navigate('/customers')
 
             } else {
                 toast.error(response.data.message);

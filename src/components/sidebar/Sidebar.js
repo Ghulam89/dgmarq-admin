@@ -28,6 +28,16 @@ const Sidebar = ({ side, closeSidebar }) => {
           </Link>
         </li>
 
+
+        <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
+          <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
+          <PiSlidersBold className=" mr-2" size={20} />
+
+          <Link to="/customers" className="text-lg capitalize">
+            Customers
+          </Link>
+        </li>
+
         <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
           <PiSlidersBold className=" mr-2" size={20} />
@@ -67,7 +77,7 @@ const Sidebar = ({ side, closeSidebar }) => {
 
         <li className="px-4 cursor-pointer  font-semibold  transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <MdOutlineProductionQuantityLimits className=" mr-2" size={20} />
-          <Link to="/customers" className="text-lg capitalize">
+          <Link to="/products" className="text-lg capitalize">
             Product
           </Link>
         </li>

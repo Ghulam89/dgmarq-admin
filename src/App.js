@@ -24,6 +24,7 @@ import PublicRoute from "./routes/PublicRoute";
 import Glossary from "./screens/glossary";
 import SubCategory from "./screens/subCategory";
 import AddProduct from "./screens/Customer/AddProduct";
+import Products from "./screens/products";
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
           <Route path="/service_request" element={<ServiceRequest />} />
           <Route path="/key_management" element={<SupporterManagement />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/category" element={<AdminUser />} />
           <Route path="/sub-categories" element={<SubCategory />} />
