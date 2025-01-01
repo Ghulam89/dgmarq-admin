@@ -1,1 +1,1 @@
-export const Base_url = 'http://46.202.140.164:5000'
+export const Base_url = 'https://api.dgmarq.com'
