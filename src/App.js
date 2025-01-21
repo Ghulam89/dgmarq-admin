@@ -25,6 +25,10 @@ import Glossary from "./screens/glossary";
 import SubCategory from "./screens/subCategory";
 import AddProduct from "./screens/Customer/AddProduct";
 import Products from "./screens/products";
+import FlashDeals from "./screens/FlashDeals";
+import AddFlashDeals from "./screens/FlashDeals/AddFlashDeals";
+import DealsProducts from "./screens/DealsProducts";
+import UpcomingReleases from "./screens/UpcomingReleases";
 function App() {
   return (
     <>
@@ -42,6 +46,10 @@ function App() {
           <Route path="/key_management" element={<SupporterManagement />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/flash-deals" element={<FlashDeals />} />
+          <Route path="/upcoming-releases" element={<UpcomingReleases />} />
+          <Route path="/flash-deals-product/:id" element={<DealsProducts />} />
+          <Route path="/add-flash-deals" element={<AddFlashDeals />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/category" element={<AdminUser />} />
           <Route path="/sub-categories" element={<SubCategory />} />

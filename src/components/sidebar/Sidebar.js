@@ -42,6 +42,25 @@ const Sidebar = ({ side, closeSidebar }) => {
           <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
           <PiSlidersBold className=" mr-2" size={20} />
 
+          <Link to="/flash-deals" className="text-lg capitalize">
+            Flash Deals
+          </Link>
+        </li>
+
+        <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
+          <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
+          <PiSlidersBold className=" mr-2" size={20} />
+
+          <Link to="/upcoming-releases" className="text-lg capitalize">
+            Upcoming Releases
+          </Link>
+        </li>
+
+
+        <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
+          <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
+          <PiSlidersBold className=" mr-2" size={20} />
+
           <Link to="/home_banner" className="text-lg capitalize">
             Home Banner
           </Link>
@@ -50,11 +69,11 @@ const Sidebar = ({ side, closeSidebar }) => {
           <i className="bi bi-speedometer2  text-white inline-block text-xl"></i>
           <RxDashboard className=" mr-2" size={20} />
           <Link to="/brands" className="text-lg capitalize">
-           
+
             main Categories
           </Link>
         </li>
-        
+
         <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center hover:bg-[#F1521B] hover:text-white">
           <BsSliders className=" mr-2" size={20} />
           <Link to="/sub-categories" className="text-lg capitalize">
@@ -65,15 +84,15 @@ const Sidebar = ({ side, closeSidebar }) => {
         <li className="px-4 cursor-pointer  font-semibold  transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <FiUsers className=" mr-2" size={20} />
           <Link to="/category" className="text-lg capitalize">
-           Sub  Categories
+            Sub  Categories
           </Link>
         </li>
 
 
 
-       
 
-        
+
+
 
         <li className="px-4 cursor-pointer  font-semibold  transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <MdOutlineProductionQuantityLimits className=" mr-2" size={20} />
