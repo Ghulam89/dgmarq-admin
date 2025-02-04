@@ -64,17 +64,29 @@ const UpdateNews = ({ isModalOpen, setIsModalOpen, closeModal, setUsers, getData
     setContent(value);
   };
 
-  // Submit form and upload image if new image file is selected
   const bannerSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
     const params = new FormData();
-    params.append('title', title);
-    params.append('content', subContent);
-    params.append('shortDescription', content);
-    params.append('image', imageFile);
+    if(title){
+      params.append('title', title);
+    }
+
+    if(subContent){
+
+      
+    params.append('content', content);
+    }
+    if(content){
+
+      params.append('shortDescription', subContent);
+    }
+    if(imageFile){
+      params.append('image', imageFile);
+    }
+    
 
     try {
       const res = await axios.put(`${Base_url}/blog/update/${getData?._id}`, params);
