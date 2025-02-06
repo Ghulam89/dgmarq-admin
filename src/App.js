@@ -29,6 +29,8 @@ import FlashDeals from "./screens/FlashDeals";
 import AddFlashDeals from "./screens/FlashDeals/AddFlashDeals";
 import DealsProducts from "./screens/DealsProducts";
 import UpcomingReleases from "./screens/UpcomingReleases";
+import Platform from "./screens/platform";
+import Region from "./screens/region";
 function App() {
   return (
     <>
@@ -54,6 +56,8 @@ function App() {
           <Route path="/category" element={<AdminUser />} />
           <Route path="/sub-categories" element={<SubCategory />} />
           <Route path="/brands" element={<Brands />} />
+          <Route path="/platform" element={<Platform />} />
+          <Route path="/region" element={<Region />} />
           <Route path="/home_banner" element={<HomeBanner />} />
           <Route path="/blogs" element={<News />} />
           <Route path="/glossary" element={<Glossary/>} />

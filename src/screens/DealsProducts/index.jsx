@@ -86,7 +86,30 @@ const DealsProducts = () => {
                 if(res?.data?.status==='success'){
                   toast.success(res?.data?.message);
 
-               
+                  axios
+                  .get(`${Base_url}/products/getAll?page=1`)
+                  .then((res) => {
+                      console.log(res);
+      
+                      setProducts(res?.data?.data?.data);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+      
+      
+      
+                  axios
+                  .get(`${Base_url}/flashDeals/getProduct/${id}`)
+                  .then((res) => {
+                      console.log(res);
+      
+                      setFlashDeals(res?.data?.data);
+                  })
+                  .catch((error) => {
+                      console.log(error);
+                  });
+      
 
                   
                 }else{
