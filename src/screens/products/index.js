@@ -90,15 +90,16 @@ const Products = () => {
         <div>
           <h2 className="main_title">Products</h2>
         </div>
-        <Link   to={'/add-product'} >
+        {/* <Link   to={'/add-product'} >
           <Button
 
              onClick={()=>setIsModalOpen(true)}
             className={"  bg-primary py-2.5"}
             label={`Add Product`}
           />
-        </Link>
+        </Link> */}
       </div>
+
 
       <UpdateProducts
         // setIsModalOpen={setIsModalOpen}

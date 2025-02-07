@@ -20,11 +20,11 @@ const DealsProducts = () => {
 
     useEffect(() => {
         axios
-            .get(`${Base_url}/products/getAll?page=1`)
+            .get(`${Base_url}/products/getAll`)
             .then((res) => {
                 console.log(res);
 
-                setProducts(res?.data?.data?.data);
+                setProducts(res?.data?.data);
             })
             .catch((error) => {
                 console.log(error);

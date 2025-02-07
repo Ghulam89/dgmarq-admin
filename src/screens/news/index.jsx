@@ -22,7 +22,7 @@ const News = () => {
       .then((res) => {
         console.log(res);
 
-        setUsers(res?.data?.data?.data);
+        setUsers(res?.data?.data);
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +54,7 @@ const News = () => {
       .then((res) => {
         console.log(res);
 
-        setUsers(res?.data?.data?.data);
+        setUsers(res?.data?.data);
       })
       .catch((error) => {
         console.log(error);
