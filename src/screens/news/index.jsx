@@ -18,7 +18,7 @@ const News = () => {
 
   useEffect(() => {
     axios
-      .get(`${Base_url}/blog/getAll?page=1`)
+      .get(`${Base_url}/blog/getAll`)
       .then((res) => {
         console.log(res);
 
@@ -50,7 +50,7 @@ const News = () => {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
 
               axios
-      .get(`${Base_url}/blog/getAll?page=1`)
+      .get(`${Base_url}/blog/getAll`)
       .then((res) => {
         console.log(res);
 
@@ -173,7 +173,7 @@ const News = () => {
                                     />
                                   </div>
 
-                                  <div>
+                                  <div className="  cursor-pointer">
                                     <img
                                       onClick={() => removeFunction(item._id)}
                                       src={require("../../assets/image/del.png")}

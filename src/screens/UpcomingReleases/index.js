@@ -6,8 +6,10 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { FaCheck, FaPlus } from "react-icons/fa";
+import { FaCheck, FaPlus, FaTimes } from "react-icons/fa";
 import { MdOutlineAddCircle } from "react-icons/md";
+import { ClipLoader } from "react-spinners";
+
 const DealsProducts = () => {
     const [products, setProducts] = useState([]);
     const [flashDeals, setFlashDeals] = useState([]);
@@ -15,41 +17,36 @@ const DealsProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [bannerImage, setBannerImage] = useState(null);
     const [logoImage, setLogoImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        fetchProducts();
+        fetchFlashDeals();
+    }, []);
+
+    const fetchProducts = () => {
         axios
             .get(`${Base_url}/products/getAll`)
             .then((res) => {
-                console.log(res);
-
                 setProducts(res?.data?.data);
             })
             .catch((error) => {
                 console.log(error);
             });
+    };
 
-
-
+    const fetchFlashDeals = () => {
         axios
             .get(`${Base_url}/upcoming/getAll`)
             .then((res) => {
-                console.log(res);
-
                 setFlashDeals(res?.data?.data);
             })
             .catch((error) => {
                 console.log(error);
             });
-
-
-
-
-
-    }, []);
-
-
+    };
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -68,48 +65,34 @@ const DealsProducts = () => {
         setLogoImage(e.target.files[0]);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!selectedProduct) {
             toast.error('Please select a product.');
             return;
         }
+
+        setIsLoading(true); // Start loading
 
         const formData = new FormData();
         formData.append('productId', selectedProduct._id);
         if (bannerImage) formData.append('banner', bannerImage);
         if (logoImage) formData.append('logo', logoImage);
 
-        axios
-            .post(`${Base_url}/upcoming/create`, formData)
-            .then((res) => {
-                if (res?.data?.status === 'success') {
-                    toast.success(res?.data?.message);
-
-
-                    axios
-                    .get(`${Base_url}/upcoming/getAll`)
-                    .then((res) => {
-                        console.log(res);
-        
-                        setFlashDeals(res?.data?.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-         
-                } else {
-                    toast.error(res?.data?.message);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        try {
+            const res = await axios.post(`${Base_url}/upcoming/create`, formData);
+            if (res?.data?.status === 'success') {
+                toast.success(res?.data?.message);
+                fetchFlashDeals(); // Refresh the flash deals list
+            } else {
+                toast.error(res?.data?.message);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('An error occurred while saving the product.');
+        } finally {
+            setIsLoading(false); // Stop loading
+        }
     };
-
-    const filteredProducts = products.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
 
     const removeFunction = (id) => {
         Swal.fire({
@@ -125,20 +108,9 @@ const DealsProducts = () => {
                 axios
                     .delete(`${Base_url}/upcoming/delete/${id}`)
                     .then((res) => {
-                        console.log(res);
                         if (res.status === 200) {
                             Swal.fire("Deleted!", "Your file has been deleted.", "success");
-                            axios
-                            .get(`${Base_url}/upcoming/getAll`)
-                            .then((res) => {
-                                console.log(res);
-                
-                                setFlashDeals(res?.data?.data);
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-
+                            fetchFlashDeals(); // Refresh the flash deals list
                         }
                     })
                     .catch((error) => {
@@ -148,13 +120,12 @@ const DealsProducts = () => {
         });
     };
 
-
-
+    const filteredProducts = products.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <Wrapper>
-
-
             <section className="mb-12 mt-7 shadow-xl bg-white p-3 text-gray-800">
                 <h2 className="main_title pb-2 border-b">Add Upcoming Releases</h2>
 
@@ -162,16 +133,13 @@ const DealsProducts = () => {
                     <label className="block mb-2 font-medium">Banner Image:</label>
                     <input type="file" onChange={handleBannerImageChange} className="outline-none bg-lightGray w-full border p-2.5 text-black placeholder:text-black rounded-md" />
 
-                    <div className=" pt-2">
-
+                    <div className="pt-2">
                         <label className="block mb-2 font-medium">Logo Image:</label>
-                        <input type="file" onChange={handleLogoImageChange} className="outline-none bg-lightGray w-full border p-2.5 text-black placeholder:text-black rounded-md"
-                        />
-
+                        <input type="file" onChange={handleLogoImageChange} className="outline-none bg-lightGray w-full border p-2.5 text-black placeholder:text-black rounded-md" />
                     </div>
                 </div>
 
-                <div className="my-12 px-3">
+                <div className="my-12 px-3 relative">
                     <input
                         type="text"
                         className="outline-none bg-lightGray w-full border p-2.5 text-black placeholder:text-black rounded-md"
@@ -221,7 +189,7 @@ const DealsProducts = () => {
                                         className="ml-2 absolute -top-2 -right-2 text-red-500"
                                         onClick={() => setSelectedProduct(null)}
                                     >
-                                        <MdOutlineAddCircle size={20} className="text-gray-500" />
+                                        <FaTimes size={20} className="text-gray-500" />
                                     </button>
                                 </div>
                             </div>
@@ -231,115 +199,71 @@ const DealsProducts = () => {
 
                 <div className="flex mb-4 justify-end items-center">
                     <button
-                        className="bg-primary text-white px-4 py-2 rounded-md"
+                        className="bg-primary text-white px-4 py-2 rounded-md flex items-center"
                         onClick={handleSubmit}
+                        disabled={isLoading}
                     >
-                        Save Selected
+                        {isLoading ? (
+                            <div className=" flex gap-3">
+                                <ClipLoader size={20} color="#ffffff" className="mr-2" />
+                                <p>Save Selected</p>
+                            </div>
+
+                        ) : (
+                            "Save Selected"
+                        )}
                     </button>
                 </div>
             </section>
-
-
 
             <section className="mb-20 mt-7 shadow-xl bg-white p-3 text-gray-800">
                 <h2 className="main_title pb-5">New and Upcoming Releases</h2>
 
                 <div className="block rounded-lg shadow-lg">
                     <div className="flex overflow-x-auto flex-col">
-                        <div className=" sm:-mx-6 lg:-mx-8">
+                        <div className="sm:-mx-6 lg:-mx-8">
                             <div className="inline-block min-w-full sm:px-6 lg:px-8">
                                 <div className="">
                                     <table className="min-w-full mb-0">
-                                        <thead className=" bg-primary">
-                                            <tr className=" rounded-lg whitespace-nowrap ">
-                                                <th
-                                                    scope="col"
-                                                    className=" text-sm text-white  font-bold px-6 py-4"
-                                                >
-                                                    No
-                                                </th>
-                                              
-
-                                                <th
-                                                    scope="col"
-                                                    className=" text-sm text-white  font-bold px-6 py-4"
-                                                >
-                                                    Banner
-                                                </th>
-
-
-                                                <th
-                                                    scope="col"
-                                                    className=" text-sm text-white  font-bold px-6 py-4"
-                                                >
-                                                    Logo
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    className=" text-sm text-white  font-bold px-6 py-4"
-                                                >
-                                                    Product Name
-                                                </th>
-
-
-
-                                                <th
-                                                    scope="col"
-                                                    className="text-sm  text-white   font-bold px-6 py-4"
-                                                >
-                                                    Action
-                                                </th>
+                                        <thead className="bg-primary">
+                                            <tr className="rounded-lg whitespace-nowrap">
+                                                <th scope="col" className="text-sm text-white font-bold px-6 py-4">No</th>
+                                                <th scope="col" className="text-sm text-white font-bold px-6 py-4">Banner</th>
+                                                <th scope="col" className="text-sm text-white font-bold px-6 py-4">Logo</th>
+                                                <th scope="col" className="text-sm text-white font-bold px-6 py-4">Product Name</th>
+                                                <th scope="col" className="text-sm text-white font-bold px-6 py-4">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="">
-                                            {flashDeals?.map((item, index) => {
-                                                return (
-                                                    <tr className="bg-white border-t   rounded-md ">
-                                                        <th
-                                                            scope="row"
-                                                            className="text-sm font-normal px-6 py-4  "
-                                                        >
-                                                            <p className="mb-0.5 font-medium text-black">
-                                                                #{index + 1}
-                                                            </p>
-                                                        </th>
-                                                     
-                                                        <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap  text-center">
-                                                            <div className=" w-20  h-20 mx-auto">
-                                                                <img src={item?.banner} className=" w-full object-cover mx-auto rounded-md h-full" alt="" />
+                                        <tbody>
+                                            {flashDeals?.map((item, index) => (
+                                                <tr key={item._id} className="bg-white border-t rounded-md">
+                                                    <th scope="row" className="text-sm font-normal px-6 py-4">
+                                                        <p className="mb-0.5 font-medium text-black">#{index + 1}</p>
+                                                    </th>
+                                                    <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+                                                        <div className="w-20 h-20 mx-auto">
+                                                            <img src={item?.banner} className="w-full object-cover mx-auto rounded-md h-full" alt="" />
+                                                        </div>
+                                                    </td>
+                                                    <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+                                                        <div className="w-20 h-20 mx-auto">
+                                                            <img src={item?.logo} className="w-full object-cover mx-auto rounded-md h-full" alt="" />
+                                                        </div>
+                                                    </td>
+                                                    <td className="align-middle text-sm font-normal px-6 py-4 text-center">
+                                                        <span className="text-base text-black py-1 px-2.5 leading-none text-center align-baseline bg-green-200 rounded-full">
+                                                            {item?.productId?.title}
+                                                        </span>
+                                                    </td>
+                                                    <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap">
+                                                        <div className="flex justify-center items-center gap-3">
+                                                            <div className="cursor-pointer" onClick={() => removeFunction(item?._id)}>
+                                                                <img src={require("../../assets/image/del.png")} alt="" />
                                                             </div>
-                                                        </td>
-                                                        <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap  text-center">
-                                                            <div className=" w-20  h-20 mx-auto">
-                                                                <img src={item?.logo} className=" w-full object-cover mx-auto rounded-md h-full" alt="" />
-                                                            </div>
-                                                        </td>
-
-                                                        <td className="align-middle text-sm font-normal px-6 py-4  text-center">
-                                                            <span className=" text-base text-black  py-1 px-2.5 leading-none text-center align-baseline   bg-green-200  rounded-full">
-                                                                {item?.productId?.title}
-                                                            </span>
-                                                        </td>
-
-
-
-                                                        <td className="align-middle  text-sm font-normal px-6 py-4 whitespace-nowrap">
-                                                            <div className=" flex justify-center items-center gap-3">
-
-                                                                <div
-                                                                    className=" cursor-pointer"
-                                                                    onClick={() => removeFunction(item?._id)}
-                                                                >
-                                                                    <img
-                                                                        src={require("../../assets/image/del.png")}
-                                                                        alt=""
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
@@ -348,8 +272,6 @@ const DealsProducts = () => {
                     </div>
                 </div>
             </section>
-
-
         </Wrapper>
     );
 };

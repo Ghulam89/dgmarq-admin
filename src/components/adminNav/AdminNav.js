@@ -34,11 +34,11 @@ const AdminNav = ({ openSidebar, side, closeSidebar }) => {
           )}
 
           <div className=" hidden md:block w-96">
-            <Input
+            {/* <Input
               placeholder={`Search...`}
               Icon={<FaSearch />}
               className={" w-full border"}
-            />
+            /> */}
           </div>
         </div>
 

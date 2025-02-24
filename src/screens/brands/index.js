@@ -4,7 +4,6 @@ import Button from "../../components/Button";
 import axios from "axios";
 import { Base_url } from "../../utils/Base_url";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import AddBrand from "./AddBrands";
 import EditBrands from "./EditBrands";
 
@@ -54,7 +53,7 @@ const Brands = () => {
                 .then((res) => {
                   console.log(res.data);
 
-                  setUsers(res.data.data.data);
+                  setUsers(res.data.data);
                 })
                 .catch((error) => {
                   console.log(error);
@@ -76,7 +75,6 @@ const Brands = () => {
         <div>
           <h2 className="main_title">Main Categories</h2>
         </div>
-
 
         <div>
           <Button
@@ -171,17 +169,18 @@ const Brands = () => {
 
                               <td className="align-middle  text-sm font-normal px-6 py-4 whitespace-nowrap">
                                 <div className=" flex justify-center gap-2">
-                                  <div>
+                                  <div  className="  cursor-pointer">
                                     <img
                                       onClick={() => {
                                         setIsUpdateOpen2(true);
                                         setSingleUser(item)
                                       }}
+                                       className=" cursor-pointer"
                                       src={require("../../assets/image/edit.png")}
                                       alt=""
                                     />
                                   </div>
-                                  <div>
+                                  <div className=" cursor-pointer">
                                     <img
                                       onClick={() => removeFunction(item._id)}
                                       src={require("../../assets/image/del.png")}

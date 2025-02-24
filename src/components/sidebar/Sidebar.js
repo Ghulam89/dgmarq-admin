@@ -76,14 +76,14 @@ const Sidebar = ({ side, closeSidebar }) => {
         </li>
 
 
-        <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
+        {/* <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <i className="bi bi-speedometer2 mr-2 text-white inline-block text-xl"></i>
           <PiSlidersBold className=" mr-2" size={20} />
 
           <Link to="/home_banner" className="text-lg capitalize">
             Home Banner
           </Link>
-        </li>
+        </li> */}
         <li className="px-4 cursor-pointer   font-semibold   transition-all py-3 text-white flex items-center  hover:bg-[#F1521B] hover:text-white">
           <i className="bi bi-speedometer2  text-white inline-block text-xl"></i>
           <RxDashboard className=" mr-2" size={20} />

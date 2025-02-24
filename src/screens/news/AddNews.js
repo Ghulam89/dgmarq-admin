@@ -70,7 +70,6 @@ const AddNews = ({ isModalOpen, setIsModalOpen, closeModal, setUsers }) => {
 
     setLoading(true);
 
-    // Creating a FormData object for the API call
     const params = new FormData();
     params.append('title', title);
     params.append('content', subContent);
@@ -89,11 +88,11 @@ const AddNews = ({ isModalOpen, setIsModalOpen, closeModal, setUsers }) => {
         toast.success(res.data?.message);
 
         axios
-      .get(`${Base_url}/blog/getAll?page=1`)
+      .get(`${Base_url}/blog/getAll`)
       .then((res) => {
         console.log(res);
 
-        setUsers(res?.data?.data?.data);
+        setUsers(res?.data?.data);
       })
       .catch((error) => {
         console.log(error);

@@ -101,7 +101,7 @@ const AddFlashDeals = () => {
                                 {/* Title Input */}
                                 <div className="w-[100%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Title
+                                        Title <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="title"
@@ -119,7 +119,7 @@ const AddFlashDeals = () => {
                                 {/* Flash Deal Start Date */}
                                 <div className="w-[49%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Flash Deal Start Date
+                                        Flash Deal Start Date <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="startDate"
@@ -136,7 +136,7 @@ const AddFlashDeals = () => {
                                 {/* Flash Deal End Date */}
                                 <div className="w-[49%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Flash Deal End Date
+                                        Flash Deal End Date <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="endDate"
@@ -153,7 +153,7 @@ const AddFlashDeals = () => {
                                 {/* Actual Price */}
                                 <div className="w-[49%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Actual Price
+                                        Actual Price <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="actualPrice"
@@ -171,7 +171,7 @@ const AddFlashDeals = () => {
                                 {/* Discount Price */}
                                 <div className="w-[49%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Discount Price
+                                        Discount Price <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="discountPrice"
@@ -188,7 +188,7 @@ const AddFlashDeals = () => {
                                 {/* Discount Price */}
                                 <div className="w-[49%]">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Gst
+                                        Gst <span className=" text-red">*</span>
                                     </label>
                                     <Field
                                         name="gst"
@@ -208,7 +208,7 @@ const AddFlashDeals = () => {
                                 {/* Single Image Upload */}
                                 <div className="w-[100%] mt-3">
                                     <label className="block mb-2 text-sm font-medium text-gray-900">
-                                        Product Image
+                                        Product Image <span className=" text-red">*</span>
                                     </label>
                                     <input
                                         type="file"
