@@ -31,6 +31,9 @@ import DealsProducts from "./screens/DealsProducts";
 import UpcomingReleases from "./screens/UpcomingReleases";
 import Platform from "./screens/platform";
 import Region from "./screens/region";
+import BundleDeals from "./screens/BundleDeals/BundleDeals";
+import AddBundleDeals from "./screens/BundleDeals/AddBundleDeals";
+import DealsBundleProducts from "./screens/DealsBundleProducts";
 function App() {
   return (
     <>
@@ -49,9 +52,12 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/products" element={<Products />} />
           <Route path="/flash-deals" element={<FlashDeals />} />
+          <Route path="/bundle-deals" element={<BundleDeals />} />
           <Route path="/upcoming-releases" element={<UpcomingReleases />} />
           <Route path="/flash-deals-product/:id" element={<DealsProducts />} />
+          <Route path="/bundle-deals-product/:id" element={<DealsBundleProducts />} />
           <Route path="/add-flash-deals" element={<AddFlashDeals />} />
+          <Route path="/add-bundle-deals" element={<AddBundleDeals />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/category" element={<AdminUser />} />
           <Route path="/sub-categories" element={<SubCategory />} />
