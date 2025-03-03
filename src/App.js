@@ -34,6 +34,7 @@ import Region from "./screens/region";
 import BundleDeals from "./screens/BundleDeals/BundleDeals";
 import AddBundleDeals from "./screens/BundleDeals/AddBundleDeals";
 import DealsBundleProducts from "./screens/DealsBundleProducts";
+import PaymentRequests from "./screens/PaymentRequests";
 function App() {
   return (
     <>
@@ -42,6 +43,7 @@ function App() {
         <Route path="/" element={<PublicRoute><AdminLogin /></PublicRoute>} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/payment-requests" element={<PaymentRequests />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/garage" element={<Garage />} />
