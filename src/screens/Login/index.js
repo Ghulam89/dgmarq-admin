@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Base_url } from "../../utils/Base_url";
+import { toast } from "react-toastify";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -33,10 +34,13 @@ const AdminLogin = () => {
           localStorage.setItem("ceat_admin_user", JSON.stringify(data));
           navigate("/dashboard");
         } else {
-          setError(response.data.message || "Login failed");
+          toast.error(response.data.message);
         }
       } catch (err) {
-        setError(err.response?.data?.message || "An error occurred");
+
+        console.log(err);
+        
+        toast.error(err.response?.data?.message);
       } finally {
         setLoading(false);
       }
