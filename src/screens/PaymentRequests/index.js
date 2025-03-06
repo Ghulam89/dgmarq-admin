@@ -3,7 +3,6 @@ import Wrapper from "../Wrapper";
 import { Base_url } from "../../utils/Base_url";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Button from "../../components/Button";
 import { toast } from "react-toastify";
 
 const PaymentRequests = () => {
